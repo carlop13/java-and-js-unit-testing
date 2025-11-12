@@ -5,11 +5,16 @@ import java.util.Map;
 import java.util.UUID;
 
 /**
- * Implementación concreta del servicio de reservaciones.
- * Utiliza un mapa en memoria para almacenar los datos.
+ * Concrete implementation of the reservation service.
+ * This class handles the business logic for managing reservations and uses an in-memory
+ * map to store the data for this demonstration.
  */
 public class ReservationService implements IReservationService {
 
+    /**
+     * In-memory storage for reservations.
+     * The key is the reservation ID (String), and the value is the Reservation object.
+     */
     private final Map<String, Reservation> reservations = new HashMap<>();
 
     @Override
@@ -37,10 +42,8 @@ public class ReservationService implements IReservationService {
         if (newGuestName == null || newGuestName.trim().isEmpty()) {
             throw new IllegalArgumentException("New guest name cannot be empty.");
         }
+        // This line was added to fix a bug discovered during unit testing.
         reservation.setGuestName(newGuestName);
-        /* ya se arregló
-        // ¡ERROR INTENCIONAL! Esta línea falta para que la descubras con tus pruebas.
-        // reservation.setGuestName(newGuestName);*/
         return reservation;
     }
 
